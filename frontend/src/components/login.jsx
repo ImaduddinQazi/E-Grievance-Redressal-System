@@ -32,10 +32,10 @@ export default function Login() {
       throw new Error(data.error || "Login failed");
     }
 
-    // Store user data in localStorage/session
+   
     localStorage.setItem("user", JSON.stringify(data.user));
     
-    // Redirect to dashboard
+    
     navigate("/dashboard");
     
   } catch (err) {

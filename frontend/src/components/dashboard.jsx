@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
-  // Mock data - replace with real API calls
+  
   const userStats = {
   
     complaintsSubmitted: 12,
@@ -18,7 +18,7 @@ export default function Dashboard() {
     ],
   };
   useEffect(() => {
-    // Get user data from localStorage
+    
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       navigate("/login");
