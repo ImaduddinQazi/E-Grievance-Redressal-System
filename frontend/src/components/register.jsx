@@ -19,26 +19,37 @@ export default function Register() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
+  e.preventDefault();
+  setMessage("");
 
-    try {
-      const res = await fetch("http://localhost:5000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+  try {
+    console.log("Submitting registration:", form);
+    
+    const res = await fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-      const data = await res.json();
-      if (res.ok) {
+    const data = await res.json();
+    console.log("Registration response:", data);
+
+    if (res.ok) {
+      setMessage("Registration successful! Redirecting to login...");
+      // Wait a moment before redirecting so user can see the success message
+      setTimeout(() => {
         navigate("/login");
-      } else {
-        setMessage(data.error || "Registration failed");
-      }
-    } catch (err) {
-      setMessage("⚠️ Server error, please try again later.");
+      }, 1500);
+    } else {
+      setMessage(data.error || "Registration failed");
     }
-  };
+  } catch (err) {
+    console.error("Registration error:", err);
+    setMessage("⚠️ Server error, please try again later.");
+  }
+};
 
   return (
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>

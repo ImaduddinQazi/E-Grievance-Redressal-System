@@ -4,60 +4,105 @@
   min-height: 100vh;
 }
 
-.dashboard-title {
-  font-weight: 600;
-  color: #2c3e50;
+.header-section {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  color: white;
+  margin-bottom: 2rem;
 }
 
-.stats-card {
-  transition: transform 0.3s;
+.report-card {
+  transition: transform 0.2s ease-in-out;
   border: none;
+  border-radius: 12px;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+}
+
+.alert-dismissible {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 1050;
+  min-width: 300px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.active-nav {
+  font-weight: 600;
+  color: #154874 !important;
+  border-bottom: 2px solid #007bff;
+}
+.bg-gradient-info {
+  background: linear-gradient(135deg, #154874 0%) !important;
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, #167135 0%) !important;
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, #5e0c25 0%) !important;
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, #17a099 0%) !important;
+}
+
+.chart-container {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.progress-bar {
+  transition: width 0.3s ease;
+}
+/* Smooth animations */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Custom scrollbar */
+.style-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.style-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
   border-radius: 10px;
 }
 
-.stats-card:hover {
-  transform: translateY(-5px);
+.style-scroll::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
 }
 
-.stats-card h2 {
-  font-size: 2.5rem;
-  color: #4facfe;
+.style-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
-.activity-list {
-  margin-top: 1rem;
-}
-
-.activity-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
-}
-
-.status-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.status-badge.in-progress {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status-badge.resolved {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-/* Gradient background for the header */
-.dashboard-header {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 0 0 20px 20px;
+/* Chart container */
+.chart-container {
+  position: relative;
+  margin: auto;
 }
