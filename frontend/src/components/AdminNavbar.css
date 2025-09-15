@@ -1,0 +1,105 @@
+/* frontend/src/components/AdminNavbar.css */
+.admin-nav {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.admin-site-title {
+  margin: 0;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.admin-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.admin-nav li {
+  margin: 0;
+}
+
+.admin-nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border: 2px solid transparent;
+}
+
+.admin-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.admin-nav a.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Logout button styles */
+.admin-nav .logout-btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+}
+
+.admin-nav .logout-btn:hover {
+  background: #fff;
+  color: #dc3545;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admin-nav {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .admin-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .admin-site-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .admin-nav a {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .admin-nav .logout-btn {
+    margin-left: 0;
+    padding: 0.6rem 1.2rem;
+  }
+}

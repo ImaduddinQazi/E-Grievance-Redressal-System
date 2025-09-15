@@ -1,0 +1,135 @@
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Dashboard.css";
+import { useNavigate } from "react-router-dom";
+
+export default function Dashboard() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [complaints, setComplaints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      navigate("/login");
+    } else {
+      setCurrentUser(user);
+      fetchComplaints(user.id);
+    }
+  }, [navigate]);
+
+  const fetchComplaints = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/user-complaints?user_id=${userId}`);
+      const data = await response.json();
+      
+      if (response.ok) {
+        setComplaints(data.complaints);
+      } else {
+        setError(data.error || "Failed to fetch complaints");
+      }
+    } catch (error) {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!currentUser) {
+    return <div>Loading...</div>;
+  }
+
+  const getStatusVariant = (status) => {
+    switch (status) {
+      case 'Solved': return 'success';
+      case 'In Progress': return 'warning';
+      case 'Pending': return 'secondary';
+      default: return 'secondary';
+    }
+  };
+
+  return (
+    <Container fluid className="dashboard-container">
+      <Row className="mb-4">
+        <Col>
+          <h2 className="dashboard-title">Welcome back, {currentUser.name}!</h2>
+        </Col>
+      </Row>
+
+      {error && (
+        <Alert variant="danger" className="mb-3">
+          {error}
+        </Alert>
+      )}
+
+      {loading ? (
+        <div className="text-center">Loading complaints...</div>
+      ) : (
+        <Row>
+          <Col>
+            <h4 className="mb-3">Your Reports</h4>
+            {complaints.length === 0 ? (
+              <Alert variant="info">
+                You haven't submitted any complaints yet.
+              </Alert>
+            ) : (
+              <Row>
+                {complaints.map((complaint) => (
+                  <Col key={complaint.id} md={6} lg={4} className="mb-3">
+                    <Card className="complaint-card">
+                      <Card.Body>
+                        {/* Image placeholder - you'll need to fetch media later */}
+                        <div className="text-center mb-2">
+                          <img 
+                            src="/placeholder-image.jpg" 
+                            alt="Complaint" 
+                            className="complaint-image"
+                            style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '5px' }}
+                          />
+                        </div>
+                        
+                        <Card.Title className="complaint-title">
+                          {complaint.title}
+                        </Card.Title>
+                        
+                        <Card.Text className="complaint-details">
+                          <strong>Description:</strong> 
+                          {complaint.description.length > 100 
+                            ? `${complaint.description.substring(0, 100)}...` 
+                            : complaint.description
+                          }
+                        </Card.Text>
+                        
+                        <Card.Text className="complaint-details">
+                          <strong>Department:</strong> {complaint.department || 'Not specified'}
+                        </Card.Text>
+                        
+                        <Card.Text className="complaint-details">
+                          <strong>Status:</strong> 
+                          <span className={`status-badge badge-${getStatusVariant(complaint.status)}`}>
+                            {complaint.status}
+                          </span>
+                        </Card.Text>
+                        
+                        <Card.Text className="complaint-details">
+                          <strong>Date:</strong> {new Date(complaint.date_created).toLocaleDateString()}
+                        </Card.Text>
+                        
+                        <Card.Text className="complaint-details">
+                          <strong>Location:</strong> {complaint.location_name}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </Col>
+        </Row>
+      )}
+    </Container>
+  );
+}

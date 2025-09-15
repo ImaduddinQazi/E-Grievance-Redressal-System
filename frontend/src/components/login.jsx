@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Card, Form, Button, Alert, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
@@ -13,36 +13,45 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setMessage("");
+    e.preventDefault();
+    setMessage("");
 
-  try {
-    const res = await fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(form),
+      });
 
-    const data = await res.json();
-    
-    if (!res.ok) {
-      throw new Error(data.error || "Login failed");
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      // Save user data to localStorage
+      localStorage.setItem("user", JSON.stringify(data.user));
+      
+      // Call the onLogin prop if it exists (for parent component state update)
+      if (onLogin) {
+        onLogin(data.user);
+      }
+      
+      // Redirect based on user type
+      if (data.user.type === 'admin') {
+        navigate("/admin-dashboard");  // Redirect admin to admin dashboard
+      } else {
+        navigate("/dashboard");        // Redirect regular user to user dashboard
+      }
+      
+    } catch (err) {
+      setMessage(err.message || "⚠️ Server error, please try again later.");
+      console.error("Login error:", err);
     }
-
-   
-    localStorage.setItem("user", JSON.stringify(data.user));
-    
-    
-    navigate("/dashboard");
-    
-  } catch (err) {
-    setMessage(err.message || "⚠️ Server error, please try again later.");
-    console.error("Login error:", err);
-  }
-};
+  };
 
   return (
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>

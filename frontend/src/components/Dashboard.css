@@ -1,63 +1,208 @@
 .dashboard-container {
-  padding: 2rem;
-  background-color: #f8f9fa;
+  padding: 0;
+  background: #f8f9fa;
   min-height: 100vh;
 }
 
-.dashboard-title {
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-.stats-card {
-  transition: transform 0.3s;
-  border: none;
-  border-radius: 10px;
-}
-
-.stats-card:hover {
-  transform: translateY(-5px);
-}
-
-.stats-card h2 {
-  font-size: 2.5rem;
-  color: #4facfe;
-}
-
-.activity-list {
-  margin-top: 1rem;
-}
-
-.activity-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
-}
-
-.status-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.status-badge.in-progress {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status-badge.resolved {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-/* Gradient background for the header */
-.dashboard-header {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+/* Hero Section */
+.dashboard-hero {
+  background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
   color: white;
-  padding: 2rem;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
   margin-bottom: 2rem;
-  border-radius: 0 0 20px 20px;
+  opacity: 0.9;
+}
+
+.hero-btn {
+  background: #e74c3c;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Sections */
+.quick-stats-section,
+.quick-actions-section,
+.about-section,
+.recent-activity-section {
+  padding: 60px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+/* Stats Cards */
+.stat-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  height: 100%;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card .card-title {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #3498db;
+  margin: 0;
+}
+
+.stat-desc {
+  color: #7f8c8d;
+  margin: 0;
+}
+
+/* Action Cards */
+.action-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  text-align: center;
+}
+
+.action-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+  color: white;
+}
+
+.action-card:hover .card-title,
+.action-card:hover .card-text {
+  color: white;
+}
+
+.action-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.action-card .card-title {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.action-card .card-text {
+  color: #7f8c8d;
+}
+
+/* About Section */
+.about-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  padding: 2.5rem;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+.features-list {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+}
+
+.features-list h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.features-list ul {
+  color: #34495e;
+  line-height: 1.8;
+}
+
+/* Activity Cards */
+.activity-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.activity-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.activity-card .card-title {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .stat-col,
+  .action-col {
+    margin-bottom: 2rem;
+  }
+  
+  .about-card {
+    padding: 1.5rem;
+  }
 }

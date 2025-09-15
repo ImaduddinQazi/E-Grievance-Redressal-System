@@ -1,0 +1,137 @@
+.myreports-container {
+  padding: 20px;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.myreports-title {
+  color: #2c3e50;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.myreports-subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+/* Complaint Cards */
+.complaint-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.complaint-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.complaint-title {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.complaint-status {
+  margin-bottom: 1rem;
+}
+
+.complaint-description {
+  color: #34495e;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.complaint-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  margin-bottom: 0.5rem;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.detail-item strong {
+  color: #2c3e50;
+}
+
+.complaint-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .myreports-container {
+    padding: 15px;
+  }
+  
+  .complaint-card {
+    margin-bottom: 1.5rem;
+  }
+}
+/* Tabs styling */
+.nav-tabs .nav-link {
+  color: #2c3e50;
+  font-weight: 500;
+  border: none;
+  padding: 12px 20px;
+}
+
+.nav-tabs .nav-link.active {
+  color: #3498db;
+  background: transparent;
+  border-bottom: 3px solid #3498db;
+  font-weight: bold;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: transparent;
+  color: #3498db;
+}
+
+/* User info styling */
+.complaint-user {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+/* Alternative tab style */
+.tab-style-buttons {
+  display: flex;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #6c757d;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background: #3498db;
+  color: white;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.tab-button:hover {
+  background: #e9ecef;
+}
