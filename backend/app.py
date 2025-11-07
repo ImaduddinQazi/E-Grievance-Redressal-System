@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 import os
 from application.controllers_reports import reports_bp
 from flask_sqlalchemy import SQLAlchemy
+from application.controllers_admin import admin_bp
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'complain.sqlite3')
@@ -56,21 +57,22 @@ def create_app():
             from application.models import User, Complain, Media
             # Create all tables
             db.create_all()
-            print("✅ Database tables created successfully!")
+            print(" Database tables created successfully!")
             
             # Optional: Check if tables exist
             from sqlalchemy import inspect
             inspector = inspect(db.engine)
             tables = inspector.get_table_names()
-            print("📊 Database tables:", tables)
+            print(" Database tables:", tables)
             
         except Exception as e:
-            print(f"❌ Error creating database tables: {e}")
+            print(f" Error creating database tables: {e}")
     # ▲▲▲ END OF ADDED CODE ▲▲▲
     
     from application.controllers import auth_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(reports_bp, url_prefix='/api') 
+    app.register_blueprint(admin_bp, url_prefix='/api')
     os.makedirs('uploads', exist_ok=True)
 
 
@@ -85,5 +87,5 @@ if __name__ == '__main__':
 
 # Make sure the uploads directory exists
     os.makedirs('uploads', exist_ok=True)
-    print(f"✅ Uploads directory: {os.path.abspath('uploads')}")
+    print(f" Uploads directory: {os.path.abspath('uploads')}")
     app.run()

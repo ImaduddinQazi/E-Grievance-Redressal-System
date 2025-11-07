@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form, Navbar, Nav, Badge, Image, Alert, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+import HeatMap from './HeatMap';
 import "./Dashboard.css";
 import { Doughnut } from 'react-chartjs-2';
 import {
@@ -76,6 +77,7 @@ const DashboardContent = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const [heatmapData, setHeatmapData] = useState(null);
 const [locationData, setLocationData] = useState([]);
@@ -475,8 +477,8 @@ const fetchMyReports = async () => {
                           <option value="">Select Department</option>
                           <option value="Road Maintenance">Road Maintenance</option>
                           <option value="Sanitation">Sanitation</option>
-                          <option value="Electricity">Electricity</option>
-                          <option value="Water Supply">Water Supply</option>
+                          
+                          
                           <option value="Public Works">Public Works</option>
                         </Form.Select>
                       </Form.Group>
@@ -484,15 +486,67 @@ const fetchMyReports = async () => {
                   </Row>
 
                   <Form.Group className="mb-3">
-                    <Form.Label>Location</Form.Label>
-                    <Form.Control 
-                      type="text" 
-                      value={newReport.location} 
-                      onChange={(e) => setNewReport({ ...newReport, location: e.target.value })} 
-                      placeholder="Enter location (optional)"
-                      disabled={submitting}
-                    />
-                  </Form.Group>
+  <Form.Label>Location</Form.Label>
+  <Form.Select 
+    value={newReport.location} 
+    onChange={(e) => setNewReport({ ...newReport, location: e.target.value })} 
+    disabled={submitting}
+  >
+    <option value="">Select location</option>
+    <option value="Aurangabad City">Chh.SambhajiNagar City</option>
+    <option value="Aurangabad Station">Aurangabad Station</option>
+    <option value="CIDCO Aurangabad">CIDCO Aurangabad</option>
+    <option value="Jawahar Colony">Jawahar Colony</option>
+    <option value="Satara Parisar">Satara Parisar</option>
+    <option value="Garkheda">Garkheda</option>
+    <option value="Chikalthana">Chikalthana</option>
+    <option value="Waluj">Waluj</option>
+    <option value="Padegaon">Padegaon</option>
+    <option value="Cidco N-1">Cidco N-1</option>
+    <option value="Cidco N-2">Cidco N-2</option>
+    <option value="Cidco N-3">Cidco N-3</option>
+    <option value="Cidco N-4">Cidco N-4</option>
+    <option value="Cidco N-5">Cidco N-5</option>
+    <option value="Cidco N-6">Cidco N-6</option>
+    <option value="Cidco N-7">Cidco N-7</option>
+    <option value="Cidco N-8">Cidco N-8</option>
+    <option value="Cidco N-9">Cidco N-9</option>
+    <option value="Cidco N-10">Cidco N-10</option>
+    <option value="Cidco N-11">Cidco N-11</option>
+    <option value="Cidco N-12">Cidco N-12</option>
+    <option value="Seven Hills">Seven Hills</option>
+    <option value="Jalna Road">Jalna Road</option>
+    <option value="Beed Bypass">Beed Bypass</option>
+    <option value="Paithan Gate">Paithan Gate</option>
+    <option value="Delhi Gate">Delhi Gate</option>
+    <option value="Mumbai Gate">Mumbai Gate</option>
+    <option value="Kaulkhed">Kaulkhed</option>
+    <option value="Mukundwadi">Mukundwadi</option>
+    <option value="Nageshwarwadi">Nageshwarwadi</option>
+    <option value="Hudco">Hudco</option>
+    <option value="Shahaganj">Shahaganj</option>
+    <option value="Gulmandi">Gulmandi</option>
+    <option value="Roshan Gate">Roshan Gate</option>
+    <option value="Bara Immam">Bara Immam</option>
+    <option value="Kranti Chowk">Kranti Chowk</option>
+    <option value="Adalat Road">Adalat Road</option>
+    <option value="Station Road">Station Road</option>
+    <option value="Juna Bazar">Juna Bazar</option>
+    <option value="Nirala Bazar">Nirala Bazar</option>
+    <option value="Suraj Chowk">Suraj Chowk</option>
+    <option value="Other">Other (specify in description)</option>
+  </Form.Select>
+  {newReport.location === 'Other' && (
+    <Form.Control
+      type="text"
+      className="mt-2"
+      value={newReport.customLocation || ''}
+      onChange={(e) => setNewReport({ ...newReport, customLocation: e.target.value })}
+      placeholder="Please specify location in description"
+      disabled={submitting}
+    />
+  )}
+</Form.Group>
                   
                   <Form.Group className="mb-3">
                     <Form.Label>Description *</Form.Label>
@@ -612,6 +666,7 @@ const fetchMyReports = async () => {
       )}
 
       {view === "heatmap" && (
+        
   <Row className="justify-content-center">
     <Col md={12}>
       <Card className="shadow-sm border-0">
@@ -639,10 +694,9 @@ const fetchMyReports = async () => {
                   className="border-primary"
                 >
                   <option value="">All Departments</option>
-                  <option value="Road Maintenance">🚧 Road Maintenance</option>
+                  <option value="Road Maintenance">Road Maintenance</option>
                   <option value="Sanitation"> Sanitation</option>
-                  <option value="Electricity"> Electricity</option>
-                  <option value="Water Supply"> Water Supply</option>
+                  
                   <option value="Public Works"> Public Works</option>
                 </Form.Select>
               </Form.Group>
@@ -678,6 +732,28 @@ const fetchMyReports = async () => {
               </Button>
             </Col>
           </Row>
+          {/* Real World Map */}
+<Row className="mb-4">
+  <Col>
+    <Card className="border-0 shadow-sm">
+      <Card.Header className="bg-white">
+        <h5 className="mb-0">🗺️ Geographical Heat Map</h5>
+      </Card.Header>
+      <Card.Body>
+        <HeatMap 
+          reports={reports} 
+          onLocationClick={setSelectedLocation}
+        />
+        {selectedLocation && (
+          <div className="mt-3">
+            <h6> {selectedLocation.location}</h6>
+            <p><strong>{selectedLocation.count}</strong> reports at this location</p>
+          </div>
+        )}
+      </Card.Body>
+    </Card>
+  </Col>
+</Row>
 
           {/* Real-time Stats Cards */}
           <Row className="mb-4">
@@ -744,7 +820,7 @@ const fetchMyReports = async () => {
                     <Doughnut
                       data={{
                         labels: Object.keys(heatmapData),
-                        datasets: [
+                        datasets:[
                           {
                             data: Object.values(heatmapData).map(dept => dept.total),
                             backgroundColor: Object.values(heatmapData).map(dept => dept.color),

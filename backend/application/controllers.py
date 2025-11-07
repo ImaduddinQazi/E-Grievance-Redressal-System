@@ -59,44 +59,36 @@ def register():
         db.session.rollback()
         return jsonify({"error": "Internal server error"}), 500
 
-@auth_bp.route('/login', methods=['POST', 'OPTIONS'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
-    if request.method == 'OPTIONS':
-        return jsonify({}), 200
-        
     try:
-        logger.debug("Login endpoint hit")
-        
         data = request.get_json()
-        logger.debug(f"Login attempt for: {data.get('email') if data else 'No data'}")
         
         if not data or 'email' not in data or 'password' not in data:
-            logger.error("Missing email or password in request")
             return jsonify({"error": "Email and password required"}), 400
 
-        # Find user
         user = User.query.filter_by(email=data['email']).first()
+        
         if not user:
-            logger.error(f"User not found: {data['email']}")
+            print(f"User not found: {data['email']}")
             return jsonify({"error": "Invalid email or password"}), 401
 
         # Check password
         if not check_password_hash(user.password, data['password']):
-            logger.error(f"Invalid password for: {data['email']}")
+            print(f"Invalid password for: {data['email']}")
             return jsonify({"error": "Invalid email or password"}), 401
 
-        logger.debug(f"Login successful for: {data['email']}")
+        print(f"Login successful for: {data['email']}, Type: {user.type}")
         return jsonify({
             "message": "Login successful",
             "user": {
                 "id": user.id,
                 "name": user.name,
                 "email": user.email,
-                "type": user.type
+                "type": user.type  # Include user type in response
             }
         }), 200
 
     except Exception as e:
-        logger.error(f"Login error: {str(e)}")
-        logger.error(traceback.format_exc())
+        print(f"Login error: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500

@@ -12,7 +12,7 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   setMessage("");
 
@@ -22,25 +22,25 @@ export default function Login() {
       headers: { 
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify(form),
     });
 
     const data = await res.json();
     
-    if (!res.ok) {
-      throw new Error(data.error || "Login failed");
+    if (res.ok) {
+      localStorage.setItem("user", JSON.stringify(data.user));
+      
+      // Redirect based on user type
+      if (data.user.type === 'admin') {
+        navigate("/admin");  // Redirect to admin dashboard
+      } else {
+        navigate("/dashboard");  // Redirect to regular dashboard
+      }
+    } else {
+      setMessage(` ${data.error || "Login failed"}`);
     }
-
-   
-    localStorage.setItem("user", JSON.stringify(data.user));
-    
-    
-    navigate("/dashboard");
-    
   } catch (err) {
-    setMessage(err.message || "⚠️ Server error, please try again later.");
-    console.error("Login error:", err);
+    setMessage(" Server error. Please check if backend is running.");
   }
 };
 
