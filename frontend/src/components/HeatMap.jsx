@@ -100,7 +100,7 @@ const HeatMap = ({ reports, onLocationClick }) => {
 
   const getRadius = (count) => Math.min(30, 10 + (count * 4));
   const getColor = (count) => {
-    if (count > 5) return '#ff000071';
+    if (count > 4) return '#ff000071';
     if (count > 2) return '#ff6a0064';
     if (count > 1) return '#ffd00071';
     return '#00ff625d';

@@ -11,15 +11,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/heatmap" element={
-  <Dashboard>
-    <HeatMapView />
-  </Dashboard>
-} />
+        {/* <Route path="/heatmap" element={<Dashboard><HeatMapView /></Dashboard>} /> */}
       </Routes>
     </Router>
   );

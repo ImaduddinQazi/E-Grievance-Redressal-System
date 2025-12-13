@@ -10,6 +10,8 @@ class User(db.Model):
     address = db.Column(db.String(200), nullable=False)
     pincode = db.Column(db.String(20), nullable=False)
     type = db.Column(db.String(20), default='general')
+    
+    # Simple relationship without multiple foreign keys
     complaints = db.relationship('Complain', backref='user', lazy=True)
 
 class Complain(db.Model):
@@ -22,7 +24,16 @@ class Complain(db.Model):
     status = db.Column(db.String(20), default='Pending')
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     image_url = db.Column(db.String(200))
+    
+    # Foreign key for the user who created the complaint
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    # Add these new fields for verification
+    is_verified = db.Column(db.Boolean, default=False)
+    verified_at = db.Column(db.DateTime)
+    verified_by = db.Column(db.Integer)  # Store admin user ID without foreign key for now
+    forwarded_to = db.Column(db.String(200))  # Authority it was forwarded to
+    verification_notes = db.Column(db.Text)   # Additional notes
 
 class Media(db.Model):
     __tablename__ = 'media'
