@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Card, Form, Button, Alert, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Auth.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,84 +14,123 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setMessage("");
+    e.preventDefault();
+    setMessage("");
 
-  try {
-    const res = await fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-    const data = await res.json();
-    
-    if (!res.ok) {
-      throw new Error(data.error || "Login failed");
+      const data = await res.json();
+      
+      if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        
+        if (data.user.type === 'admin') {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      } else {
+        setMessage(`${data.error || "Login failed"}`);
+      }
+    } catch (err) {
+      setMessage("Server error. Please check if backend is running.");
     }
-
-   
-    localStorage.setItem("user", JSON.stringify(data.user));
-    
-    
-    navigate("/dashboard");
-    
-  } catch (err) {
-    setMessage(err.message || "⚠️ Server error, please try again later.");
-    console.error("Login error:", err);
-  }
-};
+  };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
-      <Row className="w-100" style={{ maxWidth: "400px" }}>
-        <Col>
-          <Card className="shadow-sm">
-            <Card.Body>
-              <h2 className="text-center mb-4">Login</h2>
-              {message && <Alert variant="danger">{message}</Alert>}
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="Enter email"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    onChange={handleChange}
-                    placeholder="Password"
-                    required
-                  />
-                </Form.Group>
-                <Button variant="primary" type="submit" className="w-100">
-                  Login
-                </Button>
-              </Form>
-              <div className="text-center mt-3">
-                <p>
-                  Don't have an account?{" "}
-                  <Button variant="link" onClick={() => navigate("/register")}>
-                    Register
-                  </Button>
-                </p>
+    <div className="auth-container">
+      <Container fluid>
+        <Row className="justify-content-center align-items-center min-vh-100">
+          <Col xl={10}>
+            <div className="auth-wrapper">
+              {/* Hero Section */}
+              <div className="auth-hero">
+                <div className="auth-hero-content">
+                  <h1>E-Redressal System</h1>
+                  <p>Citizen Grievance Portal - Efficient complaint management and resolution platform</p>
+                  <ul className="auth-hero-features">
+                    <li>Quick complaint submission</li>
+                    <li>Real-time status tracking</li>
+                    <li>Multi-department support</li>
+                    <li>Secure and reliable</li>
+                  </ul>
+                </div>
               </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+
+              {/* Form Section */}
+              <div className="auth-form-section">
+                <Card className="auth-card border-0 shadow">
+                  <Card.Body className="p-4">
+                    <h2 className="text-center mb-1">Welcome Back</h2>
+                    <p className="text-center text-muted mb-4">Sign in to your account</p>
+                    
+                    {message && (
+                      <Alert variant="danger" className="mb-3">
+                        {message}
+                      </Alert>
+                    )}
+                    
+                    <Form onSubmit={handleSubmit}>
+                      <Form.Group className="mb-3">
+                        <Form.Label className="auth-form-label">Email Address</Form.Label>
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          className="auth-form-control"
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="Enter your email"
+                          required
+                        />
+                      </Form.Group>
+                      
+                      <Form.Group className="mb-4">
+                        <Form.Label className="auth-form-label">Password</Form.Label>
+                        <Form.Control
+                          type="password"
+                          name="password"
+                          className="auth-form-control"
+                          value={form.password}
+                          onChange={handleChange}
+                          placeholder="Enter your password"
+                          required
+                        />
+                      </Form.Group>
+                      
+                      <Button 
+                        type="submit" 
+                        className="auth-btn-primary w-100 py-2"
+                      >
+                        Sign In
+                      </Button>
+                    </Form>
+                    
+                    <div className="auth-footer mt-4 pt-3">
+                      <p className="text-center text-muted mb-2">Don't have an account?</p>
+                      <div className="text-center">
+                        <Button 
+                          variant="link" 
+                          className="auth-btn-link p-0"
+                          onClick={() => navigate("/register")}
+                        >
+                          Create Account
+                        </Button>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }

@@ -3,10 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from .database import db
 
-# Create blueprint
+
 auth_bp = Blueprint('auth', __name__)
 
-# Register route
+
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -35,12 +35,12 @@ def register():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
-# Login route
+
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     
-    # Add proper error handling
+    
     if not data:
         return jsonify({"error": "No data provided"}), 400
         
@@ -59,7 +59,7 @@ def login():
         if not check_password_hash(user.password, password):
             return jsonify({"error": "Invalid password"}), 401
             
-        # Return user data needed for frontend
+        
         return jsonify({
             "message": "Login successful",
             "user": {

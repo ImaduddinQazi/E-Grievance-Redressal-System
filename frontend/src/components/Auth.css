@@ -1,58 +1,227 @@
+/* Auth.css - Fixed for Bootstrap Compatibility */
 .auth-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+  background-size: cover;
+}
+
+.auth-wrapper {
   display: flex;
+  max-width: 1000px;
+  width: 100%;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-height: 600px;
+  margin: 0 auto;
+}
+
+.auth-hero {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle fill="rgba(255,255,255,0.1)" cx="200" cy="200" r="100"/><circle fill="rgba(255,255,255,0.05)" cx="600" cy="300" r="150"/></svg>');
+}
+
+.auth-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.auth-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.auth-hero p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.auth-hero-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.auth-hero-features li {
+  display: flex;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.auth-hero-features li::before {
+  content: '✓';
+  margin-right: 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.auth-form-section {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .auth-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0px 4px 20px rgba(0,0,0,0.15);
-  width: 350px;
-  text-align: center;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.auth-card h2 {
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-.auth-card input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border 0.3s;
-}
-
-.auth-card input:focus {
-  border-color: #4facfe;
-  outline: none;
-}
-
-.auth-card button {
-  width: 100%;
-  padding: 10px;
-  background: #4facfe;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.auth-card button:hover {
-  background: #3a8dd8;
-}
-
-.auth-message {
-  margin-top: 1rem;
-  color: red;
+/* Form label styling */
+.auth-form-label {
+  font-weight: 500;
+  color: #4a5568;
   font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Form control styling that works with Bootstrap */
+.auth-form-control {
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
+}
+
+.auth-form-control:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+  outline: none !important;
+}
+
+/* Button styling that works with Bootstrap */
+.auth-btn-primary {
+  background: #667eea !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.auth-btn-primary:hover {
+  background: #5a67d8 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+.auth-btn-primary:active {
+  transform: translateY(0) !important;
+}
+
+.auth-btn-link {
+  color: #667eea !important;
+  text-decoration: underline !important;
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+.auth-btn-link:hover {
+  color: #5a67d8 !important;
+  text-decoration: underline !important;
+  background: none !important;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    flex-direction: column;
+    max-width: 400px;
+    min-height: auto;
+  }
+  
+  .auth-container {
+    padding: 1rem;
+  }
+  
+  .auth-hero {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .auth-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .auth-form-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-hero,
+  .auth-form-section {
+    padding: 1rem;
+  }
+  
+  .auth-hero h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Ensure Bootstrap components are visible and interactive */
+.auth-container .form-control,
+.auth-container .btn,
+.auth-container .alert {
+  position: relative;
+  z-index: 10;
+}
+
+/* Remove any pointer-events blocking */
+.auth-container * {
+  pointer-events: auto !important;
 }
