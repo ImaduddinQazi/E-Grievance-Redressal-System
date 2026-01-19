@@ -59,6 +59,7 @@ const HeatMap = ({ reports, onLocationClick }) => {
       'cidco n-14': [19.8741, 75.3792],
       'cidco n-15': [19.8723, 75.3817],
 
+      
       'osmanpura': [19.8800, 75.3410],      // residential area
       'agarkar mala': [19.8815, 75.3450],   // locality near central Aurangabad
       'harsul': [19.8900, 75.3550],         // east side neighborhood
