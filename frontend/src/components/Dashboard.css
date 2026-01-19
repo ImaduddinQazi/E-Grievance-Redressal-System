@@ -5,7 +5,64 @@
 }
 
 /* Header Section */
+/* Header Section */
 .header-section {
+  background: linear-gradient(90deg, #4f46e5, #3b82f6); /* gradient blue-purple */
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 12px 12px; /* rounded bottom corners */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+}
+
+/* Logo / Title */
+.header-section h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease;
+}
+
+.header-section h1:hover {
+  transform: scale(1.05);
+}
+
+/* Subtitle / Tagline */
+.header-section .subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Navigation links with independent background colors */
+.header-section nav a {
+  color: rgb(0, 0, 0);                   /* text color */
+  text-decoration: none;
+  margin-left: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;                /* slightly bigger padding */
+  border-radius: 9999px;                 /* pill-shaped */
+  border: 1px solid transparent;         /* border optional */
+  background-color: #ffffff;             /* solid background color */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for nav links */
+.header-section nav a:hover {
+  color: #ffffff;                        /* text turns white */
+  background-color: #4f46e5;             /* solid hover color */
+  transform: scale(1.05);
+  border-color: #4f46e5;
+}
+
+
+/* .header-section {
   background: white;
   border-bottom: 1px solid #e2e8f0;
   padding: 1.5rem 2rem;
@@ -22,7 +79,7 @@
 .header-section .subtitle {
   color: #718096;
   font-size: 1rem;
-}
+} */
 
 .user-info {
   text-align: right;
@@ -40,8 +97,8 @@
 
 /* Navigation */
 .navbar {
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
+  /* background: #3b82f6; */
+  border-bottom: 1px solid #3b82f6;
   padding: 0.75rem 2rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -66,6 +123,108 @@
   background: #edf2f7;
   font-weight: 600;
 }
+/* ================= Header Section ================= */
+.header-section {
+  background-color: #181824; /* dark black background */
+  padding: 1.5rem 2rem;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* Title and subtitle */
+.header-section h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff; /* vibrant green title */
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.header-section h1:hover {
+  color: #8e32e9; /* electric purple on hover */
+  transform: scale(1.05);
+}
+
+.header-section .subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  color: #dfdcdc; /* sunglow subtitle */
+}
+
+/* User info section */
+.user-info {
+  text-align: right;
+}
+
+.user-info strong {
+  display: block;
+  font-size: 1rem;
+  color: #ffe100;
+}
+
+.user-info small {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ================= Navbar ================= */
+.header-section .navbar {
+  background: transparent;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Nav links styled as colorful pills */
+.header-section .navbar .nav-link {
+  color: white;
+  margin-right: 1rem;
+  padding: 0.45rem 1.2rem;
+  border-radius: 50px; /* pill shape */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: #01b7ff; /* vibrant green buttons */
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.header-section .navbar .nav-link:hover {
+  background-color: #000000; /* hover: electric purple */
+  color: #ffffff;
+  transform: scale(1.05);
+  border-color: #ffde73; /* sunglow border on hover */
+}
+
+/* Active nav link */
+.header-section .navbar .active-nav {
+  background-color: #ff4d6b; /* fiery rose active */
+  color: #ffffff !important;
+  font-weight: 600;
+  border-color: #ffde73;
+}
+
+/* Logout button */
+.header-section .navbar .btn {
+  background-color: #ffde73; /* sunglow */
+  color: #181824; /* text black for contrast */
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.header-section .navbar .btn:hover {
+  background-color: #ff4d6b; /* fiery rose hover */
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
 
 /* Main Content */
 .main-content {

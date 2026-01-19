@@ -37,8 +37,8 @@ def create_app():
     with app.app_context():
         try:
             # Drop all existing tables and recreate
-            # db.drop_all()
-            # db.create_all()
+            db.drop_all()
+            db.create_all()
             
             print("✅ Database tables recreated successfully!")
             
