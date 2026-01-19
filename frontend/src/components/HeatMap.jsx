@@ -37,53 +37,51 @@ const HeatMap = ({ reports, onLocationClick }) => {
     }
   });
 
-  function getCoordinatesFromLocation(location) {
-    const aurangabadLocationMap = {
-      'aurangabad city': [19.8762, 75.3433],
-      'aurangabad station': [19.8744, 75.3392],
-      'cidco': [19.8942, 75.3521],
-      'cidco aurangabad': [19.8942, 75.3521],
-      'jawahar colony': [19.8689, 75.3578],
-      'satara parisar': [19.8825, 75.3306],
-      'satara': [19.8825, 75.3306],
-      'garkheda': [19.8917, 75.3689],
-      'chikalthana': [19.9014, 75.3819],
-      'waluj': [19.8333, 75.2333],
-      'padegaon': [19.8564, 75.3750],
-      'cidco n-1': [19.8976, 75.3467],
-      'cidco n-2': [19.8958, 75.3492],
-      'cidco n-3': [19.8939, 75.3517],
-      'cidco n-4': [19.8921, 75.3542],
-      'cidco n-5': [19.8903, 75.3567],
-      'cidco n-6': [19.8885, 75.3592],
-      'cidco n-7': [19.8867, 75.3617],
-      'cidco n-8': [19.8849, 75.3642],
-      'cidco n-9': [19.8831, 75.3667],
-      'cidco n-10': [19.8813, 75.3692],
-      'cidco n-11': [19.8795, 75.3717],
-      'cidco n-12': [19.8777, 75.3742],
-      'seven hills': [19.8667, 75.3417],
-      'jalna road': [19.8614, 75.3458],
-      'beed bypass': [19.8714, 75.3250],
-      'paithan gate': [19.8819, 75.3150],
-      'delhi gate': [19.8867, 75.3358],
-      
-      'kaulkhed': [19.8514, 75.3617],
-      'mukundwadi': [19.8567, 75.3517],
-      'nageshwarwadi': [19.8617, 75.3417],
-      'hudco': [19.8667, 75.3317],
-      'shahaganj': [19.8717, 75.3217],
-      'gulmandi': [19.8767, 75.3117],
-      'roshan gate': [19.8817, 75.3017],
-      'bara immam': [19.8867, 75.2917],
-      'kranti chowk': [19.8764, 75.3389],
-      'adalat road': [19.8736, 75.3361],
-      'station road': [19.8747, 75.3375],
-      'juna bazar': [19.8778, 75.3350],
-      'nirala bazar': [19.8792, 75.3333],
-      'suraj chowk': [19.8814, 75.3319],
-      'default': [19.8762, 75.3433]
-    };
+  const aurangabadLocationMap = {
+  'aurangabad city': [19.8762, 75.3433],
+  'aurangabad railway station': [19.8744, 75.3392],
+  'cidco': [19.8942, 75.3521],
+  'cidco aurangabad': [19.8942, 75.3521],
+  'cidco n-1': [19.8976, 75.3467],
+  'cidco n-2': [19.8958, 75.3492],
+  'cidco n-3': [19.8939, 75.3517],
+  'cidco n-4': [19.8921, 75.3542],
+  'cidco n-5': [19.8903, 75.3567],
+  'cidco n-6': [19.8885, 75.3592],
+  'cidco n-7': [19.8867, 75.3617],
+  'cidco n-8': [19.8849, 75.3642],
+  'cidco n-9': [19.8831, 75.3667],
+  'cidco n-10': [19.8813, 75.3692],
+  'cidco n-11': [19.8795, 75.3717],
+  'cidco n-12': [19.8777, 75.3742],
+  'cidco n-13': [19.8759, 75.3767],
+  'cidco n-14': [19.8741, 75.3792],
+  'cidco n-15': [19.8723, 75.3817],
+  
+  'osmanpura': [19.8800, 75.3410],      // residential area
+  'agarkar mala': [19.8815, 75.3450],   // locality near central Aurangabad
+  'harsul': [19.8900, 75.3550],         // east side neighborhood
+  'hanuman nagar': [19.8850, 75.3470],  // near city center
+  'market yard': [19.8770, 75.3380],    // bazaar region
+  'gulmandi': [19.8767, 75.3117],       // western Aurangabad area
+  'paithan gate': [19.8819, 75.3150],
+  'delhi gate': [19.8867, 75.3358],
+  
+  'shendra': [19.9000, 75.3600],        // industrial/residential edge area
+  'shendra midc': [19.9000, 75.3600],
+  'waluj': [19.8316, 75.2347],          // MIDC and township southwest of city :contentReference[oaicite:1]{index=1}
+  'chikalthana': [19.9014, 75.3819],    // industrial area
+  'auric': [19.9500, 75.4100],          // Aurangabad Industrial City approximate (DMIC area)
+
+  'road maintenance': [19.8762, 75.3433], // fallback same as city center
+  'sanitation': [19.8762, 75.3433],
+  'electricity': [19.8762, 75.3433],
+  'water supply': [19.8762, 75.3433],
+  'public works': [19.8762, 75.3433],
+  
+  'default': [19.8762, 75.3433]
+};
+
 
     const lowerLocation = location.toLowerCase();
     
